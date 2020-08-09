@@ -1,0 +1,791 @@
+/*  */
+body {
+    margin: 0; /*внешний отсуп */ 
+    font-family: 'Amatic SC', cursive;
+    font-family: 'Pangolin', cursive; /* Вставка шрифта*/ 
+    font-size: 15px; /* Размер шрифта */ 
+    /* background: #6d7d7e; /* цвет фона */ 
+    line-height: 1.6; /*межстрочный интервал */ 
+    color: #333; /*цвет текста */ 
+}
+
+/*  */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /*чтоб ненужно было считать пединги(отсупы)*/  
+}
+
+/*  */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0; /*Отсупы всех заголовков */ 
+} 
+
+/*  */
+hr {
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin: 40px 0;
+    border: 0;
+    background-color: #c0d8e7;
+}
+/* /one/publictest/publictest/css/main.css*/
+/*/one/publictest/publictest/img/intro1.jpg*/
+/* Container(полоска)*/
+
+/*  */
+.container {
+    width: 100%;
+    max-width: 1200px;   /* 1230 сделай */
+    /* padding: 0 15px;  раскоментируй */ 
+    margin: 0 auto; 
+}
+
+/*  */
+.intro {
+    display: flex; /* превращение в контейнер */
+    flex-direction: column; /* вращаем ось */
+    justify-content: center; /* где будут размещены блоки */
+    width: 100%;
+    height: 100vh; /*100% экрана посетителя*/
+    background: url("../img/intro1.jpg") center no-repeat;
+    -webkit-background-size: cover; /* Вся площадь экрана чтоб занимало */
+    background-size: cover; 
+}
+
+/*  */
+.intro__inner {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/*  */
+.intro__title {
+    color: #fff;
+    font-size: 150px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+/*  */
+.intro__title::after {
+    content: ""; /* Нужен для вставки сгенерируемого контента, используется при after */
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 60px auto;
+    background-color: #fff;
+}
+
+/*  */
+.intro__suptitle {
+    margin-bottom: 20px;
+    font-family: 'Amatic SC', cursive;
+    font-size: 72px;
+    color: #fff;
+} 
+
+/*  */
+.header {
+    width: 100%;
+    padding-top: 30px;
+    position: absolute;
+    top: 0; /* прижимаем к верху */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* поверх всего */
+}
+
+.header.fixed {
+    padding: 10px 0;
+    background-color: rgb(17, 114, 206);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 2); /* тень у шапки */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    transform: translate3d(0 0 0); /* чтоб не дергалась при пролистовании страниц */
+}
+
+.header.active {
+    background-color: rgb(17, 114, 206);
+}
+
+/*  */
+.header__inner {
+    display: flex; /* header_logo и nav_link рпижались слева и справа */
+    justify-content: space-between;
+    align-items: center; /* выровнить по центру справа и слева элементы */
+}
+
+/*  */
+.header__logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/*  */
+.nav {
+    font-size: 14px;
+    text-transform: uppercase;
+
+}
+
+/*  */
+.nav__link {
+    display: inline-block; /* чтоб в строку шли */
+    vertical-align: top;
+    margin: 0 15px;
+    position: relative; /* Нужно чтоб можно было ориентироаться на эту при выравнивании ссылки(когда линия подчеркивания появляется при наведении она ориентируется на эту позицию, а сам ее код прописан nav_link^after */
+    color: #fff;
+    text-decoration: none; /* подчеркивание убрано */
+    transition: color .1s linear; /* плавно меняется цвет при наведении курсора можно писать и 0.2s */
+}
+
+/*  */
+.nav__link::after {
+    content: "";
+    display: block; /* отображает элемент как блочный элемент */
+    width: 100%;
+    height: 3px;
+    /*display: none; /* теперь полоски не отображаются */
+    background-color: #fce38a;
+    opacity: 0; /* прозрачность */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    transition: opacity .1s linear;
+}
+
+/*  */
+.nav__link:hover {
+color: #fce38a;
+}
+
+/*  */
+.nav__link:hover::after,
+.nav__link.active::after {
+    opacity: 1;
+    /*  display: block; */
+}
+
+/*  */
+.nav__link.active {
+    color: #fce38a;
+}
+
+.nav-toggle {
+    width: 30px;
+    padding: 10px 0;
+    display: none; /* скрываем навигацию */
+    font-size: 0; /* скрытие текста меню */
+    color: transparent; /* скрытие текста меню */
+    border: 0;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 1;
+}
+
+.nav-toggle:focus { /* для джаваскрипт нужен */
+    outline: 0;
+}   
+
+.nav-toggle__item {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transition: background .2s linear;
+}
+
+.nav-toggle.active .nav-toggle__item {
+    background: none;
+}
+
+.nav-toggle__item::before,
+.nav-toggle__item::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    transition: transform .2s linear;
+}
+
+.nav-toggle__item::before {
+    top: -8px;
+}
+
+.nav-toggle__item::after {
+    bottom: -8px;
+}
+
+/*создание крестика  */
+.nav-toggle.active .nav-toggle__item::before {
+    transform-origin: left top; /* трансформация проходит из левой верхней точки */
+    transform: rotate(45deg) translate3d(0px, -2px, 0);
+} 
+
+/*создание крестика  */
+.nav-toggle.active .nav-toggle__item::after {
+    transform-origin: left bottom; /* трансформация проходит из левой нижней точки */
+    transform: rotate(-45deg) translate3d(0px, -3px, 0); /* c помощью транслет поворачиваем полоску а спомощью ротате наклоняем */
+} 
+
+/* кнопка */
+.btn {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 15px;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase; /* управление регистром верхний регистр */
+    text-decoration: none;
+    transition: background .1s linear, color .1s linear; /* анимация фона */
+}
+
+/* кнопка */
+.btn:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* типо контейнер где находятся 01 раз и т.д. */
+.slider {
+    width: 100%; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    /*display: flex;
+    justify-content: space-between;
+    margin-top: 30px ; */
+}
+
+/*  */
+.slider__inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* текст раз два и т.д. */
+.slider__item {
+    width: 23%;
+    padding: 20px 0;
+    position: relative; /* чтоб добавить подчеркивания (сможем позиционировать полоску для акт-ой стр-цы относительно этого элемента) */
+    border-top: 3px solid #fff; /* solid сплошная */
+    opacity: .7;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase; /* Все большими буквами */
+}
+
+/*  */
+.slider__item.active {
+    opacity: 1;
+}
+
+/* Добавление доп полоски на активной странице */
+.slider__item.active::before {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background-color: #0dd1df;
+    position: absolute;
+    top: -3px;
+    left: 0;
+    z-index: 1;
+}
+/* цифры 01 02 и т.д. */
+.slider__num {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* 2 страница типо */
+.section {
+    padding: 80px 0;
+}
+
+/*  */
+.section--devices {
+    margin-bottom: 40px;
+    padding-bottom: 0;
+    background: url("../img/bag.JPG") center no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.section--gray {
+background-color: #0dd1df ;
+height: 1px;
+}
+
+/*  */
+.section__header {
+    width: 100%;
+    max-width: 950px;
+    margin-bottom: 0 auto 50px;
+    text-align: center;
+}
+
+/*  */
+.section__suptitle {
+    font-family: 'Amatic SC', cursive;
+    font-size: 24px;
+    color: #333;
+
+}
+
+/*  */
+.section__title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/*  */
+.section__title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 30px auto;
+    background-color: #0dd1df;
+}
+
+/*  */
+.section__text {
+    font-size: 15px;
+    color: #999;
+}
+
+/* Картинки */
+.about {
+    margin-top: 80px;
+    flex-wrap: wrap; /* разрешаю перенос карточек друг под друга нужно для адапт верстки */
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Карточка + текст */
+.about__item {
+    width: 33.33333%; /* ширина картинокв */
+    background-color: #0dd1df;
+}
+
+/*  */
+.about__item:hover .about__img {
+    transform: translate3d(-10px, -10px, 0); /* смещение картинки при наведении */
+}
+
+/*  */
+.about__item:hover .about__img img {
+    opacity: .2; /* прозрачность картинки при наведении 1 =100% */
+}
+
+/* При наводе на кортинку показываем текст (about__item показываем about__text */
+.about__item:hover .about__text {
+    opacity: 1;
+}
+
+/*  */
+.about__img {
+    background: linear-gradient(to bottom, #09a2df, #c0d8e7); /* переход градиента под картинкой */
+    transition: transform .2s linear; /* трансвофрмация проходило плавно */
+}
+
+/*  */
+.about__img img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transition: opacity .1s linear;
+}
+
+/*  */
+.about__text {
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 2;
+    transform: translate3d(0, -50%, 0);
+    transition: opacity .2s linear;
+}
+
+/*  */
+.statistics {
+    background-color: #0dd1df;
+}
+
+/*  */
+.stat {
+    display: flex;
+}
+
+/*  */
+.stat__item {
+    flex: 1 1 0;
+    padding: 70px 25px;
+    border-left: 1px solid #d5ecee;
+    text-align: center;
+    color: #fff;
+}
+
+/*  */
+.stat__item:last-child {
+    border-right: 1px solid #d5ecee ;
+}
+
+/*  */
+.stat__count {
+    margin-bottom: 10px;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/*  */
+.stat__text {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/*  */
+.services {
+    display: flex;
+
+}
+
+/*  */
+.services__item {
+    flex: 1 1 0; /* одинаковая ширина */
+    padding-left: 80px;
+    padding-right: 20px;
+    position: relative;
+}
+
+/*  */
+.services__icon {
+    width: 20%;
+    position: absolute;
+    top: 0;
+    left: 5px ;
+    padding-right: 10px;
+    z-index: 1;
+}
+
+/*  */
+.services__title {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/*  */
+.services__text {
+    font-size: 15px;
+    color: #999;
+}
+
+/*  */
+.devices {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*  */
+.devices__item {
+    max-height: 300px;
+    display: block;
+}
+
+/*  */
+.devices__item--gus {
+    position: absolute;
+    bottom: -50px;
+    right:  150px;
+    z-index: 1;
+}
+
+/*  */
+.wedo {
+    display: flex;
+
+}
+
+/*  */
+.wedo__item {
+    width: 50%;
+
+}
+
+/*  */
+.accordion__item {
+    margin-bottom: 10px;
+    border: 1px solid #c7edf0;
+}
+
+.accordion__item.active .accordion__content {
+    display: block;
+
+}
+
+.accordion__item.active .accordion__header {
+    border-bottom-color: #c7edf0 ;
+}
+
+.accordion__item.active .accordion__header::after {
+    transform: translateY(-50%) rotate(-45deg); 
+    margin-top: 5px;
+}
+
+.accordion__header {
+    padding: 15px 20px 15px 65px;
+    position: relative;
+    border-bottom: 1px solid transparent; /* transparent прозрачный цвет по умолчанию */
+    cursor: pointer;
+}
+
+/* Стрелка */
+.accordion__header::after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc ;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    z-index: 1;
+    transform: translateY(-50%) rotate(135deg); 
+}
+
+.accordion__icon {
+    position: absolute;
+    max-width: 60px;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.accordion__content {
+    display: none;
+    padding: 15px 20px;
+    font-size: 15px;
+    color: #999;
+    font-style: italic;
+    font-weight: 300;
+}
+
+/*  */
+.accordion__title {
+    padding-top: 25px ;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Reviews */
+
+.reviews {
+    padding: 0, 100px;
+    position: relative;
+}
+
+.reviews .slick-slider {
+    padding: 0 110px;
+}
+
+.reviews__item {
+    padding-left: 205px ;
+    position: relative;
+}
+
+.reviews__photo {
+    display: block;
+    border: 2px solid #0dd1df;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.reviews__text {
+    margin-bottom: 15px ;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 300;
+    color: #333;
+}
+
+.reviews__author {
+    font-family: 'Pangolin', cursive;
+    font-size: 24px;
+    color: #333;
+}
+
+.reviews__author::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+    height: 3px;
+    margin-bottom: 10px;
+    background-color: #0dd1df ;
+}
+
+/*.reviews__btn {
+    font-size: 0;
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.reviews__btn::after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc ;
+}    
+
+.reviews__btn--pref {
+    left: 0;
+    transform: rotate(-45deg);
+}
+.reviews__btn--next {
+    right: 0;
+    transform: rotate(135deg);
+}
+ */
+
+ .slick-arrow {
+    display: block;
+    font-size: 0;
+    color: transparent;
+
+    border: 0;
+    background: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.slick-arrow:focus {
+    outline: 0;
+}
+
+.slick-arrow:after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+}
+
+.slick-prev {
+    left: 0;
+    transform: rotate(-45deg);
+}
+
+.reviews__btn--next,
+.slick-next {
+    right: 0;
+    transform: rotate(135deg);
+}
+
+@media (max-width: 1230px) {
+
+    .intro__suptitle {
+        font-size: 42px;
+    }
+    .intro__title {
+        font-size: 65px;
+    }
+}
+
+@media (max-width: 320px) {
+    .header {
+        padding: 10px 0;
+    }
+    .nav {
+        display: none; 
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgb(17, 114, 206) ;
+    } 
+
+    .nav.active {
+        display: block;
+    }
+
+    .nav__link {
+        display: block; /* каждый элекмент меню на новой строке */
+        margin: 0;
+        padding: 8px 20px;
+    }
+    .nav-toggle {
+        display: block; /* показываем навигацию */
+    }
+    .intro__suptitle {
+        font-size: 25px;
+    }
+    .intro__title {
+        font-size: 40px;
+    }
+    
+    .about__item {
+        width: 100%;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .about__item:last-child {
+        margin-bottom: 0;
+    }
+    
+
+}
